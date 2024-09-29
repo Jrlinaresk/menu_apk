@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Define el círculo de fondo para la ProgressBar -->
+    <item android:id="@android:id/background">
+        <shape
+            android:shape="oval">
+            <solid android:color="#C0C0C0" /> <!-- Color del fondo -->
+        </shape>
+    </item>
+    <!-- Define el círculo de progreso para la ProgressBar -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape
+                android:shape="oval">
+                <solid android:color="@color/colorAccent" /> <!-- Color del progreso -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>

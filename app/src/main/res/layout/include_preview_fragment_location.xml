@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:background="@color/black"
+    android:gravity="start|center"
+    android:orientation="horizontal"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+    <ImageView
+        android:layout_width="16sp"
+        android:layout_height="16sp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/ic_location"
+        app:tint="@color/background" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/background"
+        android:textSize="10sp"
+        android:text="Fernando #785 e/ San Agustin y Concordia. Arroyo Naranjo. La Habana. Cuba" />
+
+</LinearLayout>

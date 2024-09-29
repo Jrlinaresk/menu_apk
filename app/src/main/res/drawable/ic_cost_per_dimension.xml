@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="@color/alimentos_grupo1_nombre"
+    android:autoMirrored="true">
+    <path
+        android:strokeWidth="1.5"
+        android:strokeColor="@color/alimentos_grupo1_nombre"
+        android:fillColor="@android:color/transparent"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="m21,7.5l-9,-5.25L3,7.5m18,0l-9,5.25m9,-5.25v9l-9,5.25M3,7.5l9,5.25M3,7.5v9l9,5.25m0,-9v9"/>
+</vector>

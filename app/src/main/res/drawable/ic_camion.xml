@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="490"
+    android:viewportHeight="490"
+    android:tint="@color/black_overlay"
+    android:autoMirrored="true">
+    <path
+        android:strokeWidth="5.5"
+        android:strokeColor="@color/black_overlay"
+        android:fillColor="@android:color/transparent"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M328.4,106.2V48.9c0-11.5-9.4-20.9-20.9-20.9H20.9C9.4,28,0,37.4,0,48.9V370c0,11.5,9.4,20.9,20.9,20.9h24c1,39.8,32.9,71.1,72.9,71.1c39,0,71.9-31.4,72.9-71.1h129.4c1,39.8,32.9,71.1,72.9,71.1c39.4,0,72.5-31.9,73-72.2c0,0,22.3,2.7,24-21.9V229.2C490,188.9,464.6,92.7,328.4,106.2z M449.3,234.4H328.4v-86.5C444.9,136.7,447.6,213.2,449.3,234.4z M393,316c-25.9,0-48.4,13.1-61.3,33.1h-3.3v-73h120.9v66.1C436,326.2,415.8,316,393,316z M40.7,68.7h246v280.4H179.1c-12.9-20-35.4-33.1-61.3-33.1s-48.4,13.1-61.3,33.1H40.7V68.7z M117.8,421.3c-17.7,0-32.3-14.6-32.3-32.3s14.6-32.3,32.3-32.3s32.3,14.6,32.3,32.3C150.1,406.7,135.5,421.3,117.8,421.3z M393,421.3c-17.7,0-32.3-14.6-32.3-32.3s14.6-32.3,32.3-32.3c17.7,0,31.3,14.6,32.3,32.3C425.4,406.7,410.8,421.3,393,421.3z"/>
+    </vector>

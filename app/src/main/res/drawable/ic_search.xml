@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="@color/black_overlay"
+    android:autoMirrored="true">
+
+    <!-- La forma del path en SVG es convertida aquí -->
+    <path
+        android:fillColor="@color/transparente"
+        android:strokeColor="?attr/colorControlNormal"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M21 21L15.803 15.803a7.5 7.5 0 1 0-10.607-10.607A7.5 7.5 0 0 0 15.803 15.803z"/>
+</vector>

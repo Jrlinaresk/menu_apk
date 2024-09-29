@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- drawable/business_category_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white"/>
+    <corners android:radius="16dp"/>
+    <elevation android:shadowColor="@color/shadowColor"
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="4" />
+</shape>

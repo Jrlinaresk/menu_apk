@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="iconos_con_transparencias">#FFFFFF</color>
+
+    <color name="c0">#00FFFFFF</color>
+    <color name="c1">#FF5722</color>
+    <color name="c2">#FF9800</color>
+    <color name="c3">#00BCD4</color>
+    <color name="test_state_all">#5472EFFF</color>
+    <color name="c4">#3F51B5</color>
+    <color name="c5">#9C27B0</color>
+    <color name="c6">#009688</color>
+    <color name="c7">#FFE500</color>
+    <color name="c8">#00EEF8</color>
+    <color name="c9">#BBEE51</color>
+    <color name="c10">#026838</color>
+    <color name="c11">#4D4D4D</color>
+    <color name="c12">#E16408</color>
+    <color name="c13">#758928</color>
+    <color name="c14">#BEFFEBEE</color>
+    <color name="c14_0">#AA4571</color>
+    <color name="c14_1">#59454E</color>
+    <color name="c14_2">#423A37</color>
+    <color name="c14_3">#CEC1A1</color>
+    <color name="c14_4">#EADAB8</color>
+    <color name="c15">#80F3F3F3</color>
+    <color name="c16">#E1F5FE</color>
+    <color name="c17">#2B2A4A</color>
+
+
+    //refrigerador
+    <color name="refrigerador_bg_exterior">#9E2D6B</color>
+    <color name="refrigerador_bg_intermedio">#fffefc</color>
+    <color name="refrigerador_bg_interior">#dcdcda</color>
+    <color name="alimentos_grupo1_nombre">#01579B</color>
+    <color name="alimentos_grupo1_calidad">#43A047</color>
+    <color name="alimentos_grupo1_otros">#9E2D6B</color>
+
+
+    <color name="colorRadioButtonOn">@color/c14</color>
+    <color name="colorRadioButtonOff">#FFFFFF</color>
+
+    <color name="accentColor">#FFE500</color>
+
+    <color name="Aaalas_De_mosquito">#BDF3FF</color>
+    <color name="cesped_mosquito">#2C7A00</color>
+    <color name="flor_petalo_mosquito">#005ED7</color>
+    <color name="flor_centro_mosquito">#FFFF45</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="colorEncabezados">#E91E63</color>
+    <color name="divider">#1E88E5</color>
+    <color name="notificationNew">#1C1E88E5</color>
+
+    //----------------------------------------
+
+    <color name="ucolorPrimary">#29B6F6</color>
+    <color name="ucolorPrimaryDark">#00574B</color>
+    <color name="ucolorAccent">#D81B60</color>
+    <color name="red_100">#F44336</color>
+    <color name="red_300">#3F51B5</color>
+    <color name="red_500">#9C27B0</color>
+    <color name="red_700">#2196F3</color>
+    <color name="blue_100">#00BCD4</color>
+    <color name="blue_300">#7BAAF7</color>
+    <color name="blue_500">#009688</color>
+    <color name="blue_700">#3367D6</color>
+    <color name="green_100">#CDDC39</color>
+    <color name="green_300">#57BB8A</color>
+    <color name="green_500">#673AB7</color>
+    <color name="green_700">#0B8043</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#a854d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+    <color name="casi_transparente">#1AFFFFFF</color>
+    <color name="transparente">#00FFFFFF</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+
+    <color name="rute_line">#9AB9C2FF</color>
+    <color name="route_anim">#64DD17</color>
+
+
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="textPrimary">#333333</color>
+    <color name="textSecondary">#666666</color>
+    <color name="dividerColor">#E0E0E0</color>
+    <color name="discountColor">#FF5252</color>
+    <color name="shadowColor">#29000000</color>
+
+    <color name="radio_button_checked">#FF018786</color>  <!-- Color cuando está activo -->
+    <color name="radio_button_unchecked">#BDBDBD</color>  <!-- Color cuando está inactivo -->
+
+    <!-- Colores para el modo claro -->
+    <color name="colorPrimary">#3178c6</color>
+    <color name="colorPrimaryDark">#215a86</color>
+    <color name="colorAccent">#f9a825</color>
+    <color name="colorBackground">#f4f4f4</color>
+    <color name="colorText">#212121</color>
+
+    <!-- Colores para el modo oscuro -->
+    <color name="colorPrimaryNight">#243a5e</color>
+    <color name="colorPrimaryDarkNight">#121212</color>
+    <color name="colorAccentNight">#ffc947</color>
+    <color name="colorBackgroundNight">#121212</color>
+    <color name="colorTextNight">#e0e0e0</color>
+    <color name="c_base_swap_state">#DDDDDD</color>
+    <color name="c_status_active_swap">#22D081</color>
+    <color name="sale_color">#ff7070</color>
+
+    <color name="grey_ligth">#E5E5E5</color>
+    <color name="grey_mid">#B3B3B3</color>
+    <color name="persist_red">#ff0000</color>
+    <color name="persist_lite">#EC407A</color>
+
+    //
+
+    <color name="persist_green">#22d081</color>
+    <color name="action_button_selected">#bebebe</color>
+    <color name="gray_ligth">#e9ecef</color>
+    <color name="element_focused">#54E1F5FE</color>
+    <color name="colorPrimaryButtom">#59C38C</color>
+
+    <color name="h1_color">#333333</color>
+    <color name="h2_color">#555555</color>
+    <color name="h3_color">#777777</color>
+    <color name="body_text_color">#000000</color>
+    <color name="small_text_color">#888888</color>
+
+    <color name="black_shade_1">#292D36</color>
+    <color name="yellow">#00AEFF</color>
+
+    <color name="colorRecieveText">#1C1C1C</color>
+    <color name="colorSendText">#561100</color>
+    <color name="colorStatusText">#0091EA</color>
+
+</resources>
