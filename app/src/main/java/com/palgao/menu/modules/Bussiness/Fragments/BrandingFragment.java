@@ -1,4 +1,4 @@
-package com.palgao.menu.modules.Bussiness;
+package com.palgao.menu.modules.Bussiness.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

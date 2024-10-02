@@ -63,4 +63,14 @@ public class toolsUI {
         int itemWidth = resources.getDimensionPixelSize(R.dimen.item_width);
         return Math.max(1, recyclerViewWidth / itemWidth);
     }
+
+    public static String[] convertHorario(int horaOpen, int horaClose) {
+        // Formatear la hora de apertura
+        String apertura = String.format("%02d:00", horaOpen);
+
+        // Formatear la hora de cierre
+        String cierre = String.format("%02d:00", horaClose);
+
+        return new String[]{apertura, cierre};
+    }
 }

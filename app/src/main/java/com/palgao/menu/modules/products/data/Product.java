@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Product {
     @PrimaryKey(autoGenerate = true)
+    private String businessId;
     private String _id;
     private String name;
     private String description;
@@ -23,4 +24,13 @@ public class Product {
     public void setPrice(double price) { this.price = price; }
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
+    }
+
 }

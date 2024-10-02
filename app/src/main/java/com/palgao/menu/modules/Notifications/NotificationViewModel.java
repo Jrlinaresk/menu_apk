@@ -17,14 +17,13 @@ import okhttp3.WebSocketListener;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class NotificationViewModel extends ViewModel {
 
     private GetNotificationsUseCase getNotificationsUseCase;
     private MutableLiveData<List<Notification>> notificationsLiveData;
     private MutableLiveData<Notification> realTimeNotificationLiveData;
     private WebSocket webSocket;
-    private static final String BASE_URL = "https://pc3ld10h-8080.usw3.devtunnels.ms/api/v1/";
+    private static final String BASE_URL = "https://pc3ld10h-8080.usw3.devtunnels.ms/";
     private final SharedLoadingViewModel sharedLoadingViewModel;
 
 
