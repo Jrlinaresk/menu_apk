@@ -12,8 +12,6 @@
         android:id="@+id/constraintLayout4"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="651dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_bussiness_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-10dp"

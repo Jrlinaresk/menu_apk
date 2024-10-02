@@ -76,69 +76,73 @@ public class ProductsViewModel extends ViewModel {
         Product product = new Product();
         // Escuchar el evento 'productsUpdated' desde el servidor
         socket.on("productsUpdated", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                if (args.length > 0) {
-                    Object firstArg = args[0];
-                    try {
-                        if (firstArg instanceof JSONArray) {
-                            JSONArray productsArray = (JSONArray) firstArg;
-                            for (int i = 0; i < productsArray.length(); i++) {
-                                JSONObject productObject = productsArray.getJSONObject(i);
-                                product.setId(productObject.getString("_id"));
-                                product.setName(productObject.getString("name"));
-                                product.setDescription(productObject.getString("description"));
-                                product.setPrice(productObject.getDouble("price"));
-                                product.setImageUrl(productObject.getString("imageUrl"));
-                                productList.add(product);
+                    @Override
+                    public void call(Object... args) {
+                        if (args.length > 0) {
+                            Object firstArg = args[0];
+                            try {
+                                if (firstArg instanceof JSONArray) {
+                                    JSONArray productsArray = (JSONArray) firstArg;
+                                    for (int i = 0; i < productsArray.length(); i++) {
+                                        JSONObject productObject = productsArray.getJSONObject(i);
+                                        product.setId(productObject.getString("_id"));
+                                        product.setName(productObject.getString("name"));
+                                        product.setDescription(productObject.getString("description"));
+                                        product.setPrice(productObject.getDouble("price"));
+                                        product.setImageUrl(productObject.getString("imageUrl"));
+                                        productList.add(product);
+                                    }
+                                }
+                                else if (args[0] instanceof JSONObject) {
+                                    // Manejo de un solo producto
+                                    JSONObject productObject = (JSONObject) firstArg;
+                                    product.setId(productObject.getString("_id"));
+                                    product.setName(productObject.getString("name"));
+                                    product.setDescription(productObject.getString("description"));
+                                    product.setPrice(productObject.getDouble("price"));
+                                    product.setImageUrl(productObject.getString("imageUrl"));
+                                    updateProduct(product.getId(), product);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
-                        else if (args[0] instanceof JSONObject) {
-                            // Manejo de un solo producto
-                            JSONObject productObject = (JSONObject) firstArg;
-                            product.setId(productObject.getString("_id"));
-                            product.setName(productObject.getString("name"));
-                            product.setDescription(productObject.getString("description"));
-                            product.setPrice(productObject.getDouble("price"));
-                            product.setImageUrl(productObject.getString("imageUrl"));
-                            updateProduct(product.getId(), product);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
-            }
-        })
+                })
                 .on("productCreate", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                if (args.length > 0) {
-                    Object firstArg = args[0];
-                    try {
-                         if (firstArg instanceof JSONObject) {
-                            // Manejo de un solo producto
-                            JSONObject productObject = (JSONObject) firstArg;
-                            Product product = new Product();
-                            product.setId(productObject.getString("_id"));
-                            product.setName(productObject.getString("name"));
-                            product.setDescription(productObject.getString("description"));
-                            product.setPrice(productObject.getDouble("price"));
-                            product.setImageUrl(productObject.getString("imageUrl"));
+                    @Override
+                    public void call(Object... args) {
+                        if (args.length > 0) {
+                            Object firstArg = args[0];
+                            try {
+                                if (firstArg instanceof JSONObject) {
+                                    // Manejo de un solo producto
+                                    JSONObject productObject = (JSONObject) firstArg;
+                                    Product product = new Product();
+                                    product.setId(productObject.getString("_id"));
+                                    product.setName(productObject.getString("name"));
+                                    product.setDescription(productObject.getString("description"));
+                                    product.setPrice(productObject.getDouble("price"));
+                                    product.setImageUrl(productObject.getString("imageUrl"));
 
-                            List<Product> currentProducts = products.getValue();
-                            currentProducts.add(product);
-                            products.postValue(currentProducts);
+                                    List<Product> currentProducts = products.getValue();
+                                    if (currentProducts == null) {
+                                        currentProducts = new ArrayList<>();
+                                    }
 
-                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                                    currentProducts.add(product);
+                                    products.postValue(currentProducts);
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
-                }
-            }
-        })
+                })
                 .on("", args -> {
 
-        });
+                });
     }
 
 

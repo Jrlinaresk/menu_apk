@@ -72,10 +72,6 @@ public class ProductsFragment extends Fragment {
         recyclerView.setAdapter(productAdapter);
 
         // Observar los productos y actualizar el adaptador
-        productsViewModel.getProducts().observe(getViewLifecycleOwner(), products -> {
-            productAdapter.setProducts(products);
-        });
-
         productsViewModel.getProducts().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {

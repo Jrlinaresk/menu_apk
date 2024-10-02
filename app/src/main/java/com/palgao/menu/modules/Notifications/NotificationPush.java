@@ -4,16 +4,19 @@ import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.palgao.menu.MasterActivity;
@@ -28,8 +31,7 @@ import java.net.URISyntaxException;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
-
-public class NotificationPush {
+public class NotificationPush extends Service {
     private static final String BASE_URL = "https://pc3ld10h-8080.usw3.devtunnels.ms/";
     private static final String NOTIFICATION_CHANNEL_ID = "notification_channel";
     private static final String NOTIFICATION_CHANNEL_NAME = "Notifications";
@@ -249,5 +251,11 @@ public class NotificationPush {
             socket.disconnect();
             socket.close();
         }
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
