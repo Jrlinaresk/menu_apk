@@ -172,4 +172,19 @@
     <color name="colorSendText">#561100</color>
     <color name="colorStatusText">#0091EA</color>
 
+    <!-- Text Colors -->
+    <color name="wa_text_primary">#FFFFFF</color> <!-- Primary Text Color (White) -->
+    <color name="wa_text_secondary">#128C7E</color> <!-- Secondary Text Color (Darker Green) -->
+    <color name="wa_text_tertiary">#757575</color> <!-- Tertiary Text Color (Gray) -->
+
+    <!-- Message Bubble Colors -->
+    <color name="wa_message_sent">#DCF8C6</color> <!-- Sent Message Bubble Background -->
+    <color name="wa_message_received">#FFFFFF</color> <!-- Received Message Bubble Background -->
+
+    <color name="wa_primary">#075E54</color> <!-- WhatsApp Green -->
+    <color name="wa_primary_dark">#128C7E</color> <!-- Darker WhatsApp Green -->
+    <color name="wa_accent">#25D366</color>
+    <color name="color_blue_transparent">#2EBDF3FF</color> <!-- Lighter Green for accents -->
+
+
 </resources>

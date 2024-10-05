@@ -12,6 +12,7 @@ public class Product {
     private String description;
     private double price;
     private String imageUrl;
+    private String type;
 
     // Getters y Setters
     public String getId() { return _id; }
@@ -33,4 +34,11 @@ public class Product {
         this.businessId = businessId;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

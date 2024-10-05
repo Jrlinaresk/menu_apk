@@ -15,6 +15,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,9 +24,10 @@
             android:id="@+id/tv_h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="8"
             android:textColor="@color/white"
-            android:textSize="48sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +37,10 @@
             android:id="@+id/iv_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-12dp"
+            android:layout_marginBottom="-6dp"
             android:text="A"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/iv_m"
             app:layout_constraintEnd_toEndOf="@+id/iv_m"
             app:layout_constraintStart_toEndOf="@+id/tv_h"
@@ -49,10 +51,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-2dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
             android:text="M"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_h"
             app:layout_constraintStart_toEndOf="@+id/tv_h" />
 
@@ -62,6 +64,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout">
@@ -70,9 +73,10 @@
             android:id="@+id/tv_h_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="7"
             android:textColor="@color/white"
-            android:textSize="48sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,10 +86,10 @@
             android:id="@+id/iv_a_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-12dp"
+            android:layout_marginBottom="-6dp"
             android:text="P"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/iv_m_end"
             app:layout_constraintEnd_toEndOf="@+id/iv_m_end"
             app:layout_constraintStart_toEndOf="@+id/tv_h_end"
@@ -96,10 +100,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-2dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="8dp"
             android:text="M"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_h_end"
             app:layout_constraintStart_toEndOf="@+id/tv_h_end" />
 
@@ -109,19 +113,24 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginStart="4dp"
         android:text="-"
         android:textColor="@color/white"
-        android:textSize="48sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         app:layout_constraintStart_toEndOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -130,9 +139,9 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lunes -"
+            android:text="Lunes a"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -141,14 +150,13 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
             android:text="Viernes"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

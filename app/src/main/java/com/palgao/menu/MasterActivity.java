@@ -21,22 +21,23 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainer;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.palgao.menu.modules.Bussiness.Fragments.BrandingFragment;
-import com.palgao.menu.modules.Bussiness.DetailsFragment;
-import com.palgao.menu.modules.Bussiness.Fragments.BusinessFragment;
-import com.palgao.menu.modules.Bussiness.Fragments.BusinessViewModel;
+import com.palgao.menu.modules.Bussiness.BussineRepositoryImpl;
+import com.palgao.menu.modules.Bussiness.BussinessViewModelFactory;
+import com.palgao.menu.modules.Bussiness.Fragments.BussinessDetailsFragment;
+import com.palgao.menu.modules.Bussiness.Fragments.BussinessViewModel;
+import com.palgao.menu.modules.Bussiness.Fragments.BussinessFragment;
 import com.palgao.menu.modules.Bussiness.HorarioFragment;
-import com.palgao.menu.modules.Bussiness.entityes.Business;
+import com.palgao.menu.modules.Bussiness.entityes.Bussiness;
 import com.palgao.menu.modules.Network.ConnectionFragment;
 import com.palgao.menu.modules.Notifications.NotificationPush;
 import com.palgao.menu.modules.ProgressDialog.SharedLoadingViewModel;
+import com.palgao.menu.modules.maps.MapFragment;
 import com.palgao.menu.modules.ui.WaitingDialog;
 import com.palgao.menu.modules.products.ui.ProductsFragment;
 
@@ -44,18 +45,19 @@ public class MasterActivity extends AppCompatActivity {
 
     //View Models
     private SharedLoadingViewModel sharedLoadingViewModel;
-    private BusinessViewModel bussinessViewmodel;
+    private BussinessViewModel bussinessViewmodel;
 
     //Custom UI
     private WaitingDialog mWaitingDialog;
     private NotificationPush notificationPush;
 
     // Native UI
-    private ImageView iv_notification;
+    private ImageView iv_notification, iv_closet_propaganda;
     private TextView tv_actualizarEstadoLocal, tv_bussiness_name, tv_h, tv_h_end, tv_address_bussiness;
     private FragmentManager fragmentManager;
     private ConstraintLayout rootLayout;
-    private View include_details, include_horario, include_branding;
+    private LinearLayout ll_propaganda;
+    private View include_details, include_horario, include_branding, include_location;
     private FragmentContainerView fc_status_conection;
 
     // tools
@@ -77,7 +79,7 @@ public class MasterActivity extends AppCompatActivity {
         ReplaceFragment(new ProductsFragment(), R.id.nav_host_fragment, getSupportFragmentManager());
 
         // notificaciones
-        notificationPush = new NotificationPush(this);
+        notificationPush = new NotificationPush();
 
         // Cargar el fragmento en el FragmentContainerView
         if (savedInstanceState == null) {  // Para evitar agregar el fragmento varias veces
@@ -86,18 +88,18 @@ public class MasterActivity extends AppCompatActivity {
     }
 
     private void LoadInfo() {
-        String businessId = "66f9e0b210388fd00e51ec66";
-        bussinessViewmodel.getBusinessById(businessId).observe(this, new Observer<Business>() {
+        String businessId = "66fd45500baca1db9a5e6922";
+        bussinessViewmodel.getBusinessById(businessId).observe(this, new Observer<Bussiness>() {
             @Override
-            public void onChanged(Business business) {
-                if (business != null) {
+            public void onChanged(Bussiness bussiness) {
+                if (bussiness != null) {
                     // Actualizar las vistas con los datos del negocio
-                    tv_bussiness_name.setText(business.getName());
-                    tv_h.setText(business.getHorario().getHora_open() + "");
-                    tv_h_end.setText(business.getHorario().getHora_close()  + "");
-                    tv_address_bussiness.setText(business.getAddress().fullAddress());
-                    horaOpen = business.getHorario().getHora_open();
-                    horaClose = business.getHorario().getHora_close();
+                    tv_bussiness_name.setText(bussiness.getName());
+                    tv_h.setText(bussiness.getHorario().getHora_open() + "");
+                    tv_h_end.setText(bussiness.getHorario().getHora_close()  + "");
+                    tv_address_bussiness.setText(bussiness.getAddress().fullAddress());
+                    horaOpen = bussiness.getHorario().getHora_open();
+                    horaClose = bussiness.getHorario().getHora_close();
                     //
                     String[] horarios = convertHorario(horaOpen, horaClose);
                     String apertura = horarios[0];
@@ -111,14 +113,21 @@ public class MasterActivity extends AppCompatActivity {
 
     private void WebSocket() {
         Intent serviceIntent = new Intent(this, NotificationPush.class);
+        serviceIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startForegroundService(serviceIntent);
     }
 
     private void Listeners() {
+        iv_closet_propaganda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ll_propaganda.setVisibility(View.GONE);
+            }
+        });
         include_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReplaceFragment(new DetailsFragment(), R.id.nav_info_bussiness, getSupportFragmentManager());
+                ReplaceFragment(new BussinessFragment(), R.id.nav_info_bussiness, getSupportFragmentManager());
                 iv_notification.setVisibility(View.VISIBLE);
             }
         });
@@ -134,7 +143,14 @@ public class MasterActivity extends AppCompatActivity {
         include_branding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReplaceFragment(new BusinessFragment(), R.id.nav_info_bussiness, getSupportFragmentManager());
+                ReplaceFragment(new BussinessDetailsFragment(), R.id.nav_info_bussiness, getSupportFragmentManager());
+                iv_notification.setVisibility(View.VISIBLE);
+            }
+        });
+        include_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReplaceFragment(new MapFragment(), R.id.nav_info_bussiness, getSupportFragmentManager());
                 iv_notification.setVisibility(View.VISIBLE);
             }
         });
@@ -171,18 +187,25 @@ public class MasterActivity extends AppCompatActivity {
     }
 
     private void initViewModels() {
-        bussinessViewmodel = new ViewModelProvider(this).get(BusinessViewModel.class);
         sharedLoadingViewModel = new ViewModelProvider(this).get(SharedLoadingViewModel.class);
+
+        BussineRepositoryImpl bussineRepository = new BussineRepositoryImpl();
+        BussinessViewModelFactory factory = new BussinessViewModelFactory(sharedLoadingViewModel, bussineRepository);
+        bussinessViewmodel = new ViewModelProvider(this, factory).get(BussinessViewModel.class);
+
     }
 
     private void initVisual() {
         setContentView(R.layout.activity_main);
         tv_actualizarEstadoLocal = findViewById(R.id.tv_actualizarEstadoLocal);
         rootLayout = findViewById(R.id.root_layout);
+        ll_propaganda = findViewById(R.id.ll_propaganda);
         include_details = findViewById(R.id.include_details);
         include_horario = findViewById(R.id.include_horario);
         include_branding = findViewById(R.id.include_branding);
+        include_location = findViewById(R.id.include_location);
         iv_notification = findViewById(R.id.iv_notification);
+        iv_closet_propaganda = findViewById(R.id.iv_closet_propaganda);
         tv_bussiness_name = findViewById(R.id.tv_bussiness_name);
         tv_h = findViewById(R.id.tv_h);
         tv_h_end = findViewById(R.id.tv_h_end);

@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,9 +32,9 @@ import java.util.List;
 
 public class ProductsFragment extends Fragment {
     private int isHorizontalLayout = 1;
-
     private ProductsViewModel productsViewModel;
-    private RecyclerView recyclerView;
+    private CategoryAdapter categoryAdapter;
+    private RecyclerView recyclerView, rv_provincias;
     private ProductAdapter productAdapter;
     private SharedLoadingViewModel sharedLoadingViewModel;
     private WaitingDialog mWaitingDialog;
@@ -41,13 +42,13 @@ public class ProductsFragment extends Fragment {
     private View view;
     private View i_fragment_no_result;
     private ImageView iconLarge, iconSmall, icon_multiple;
+    private TextView tv_type, tv_pre_title, tv_title_screen;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_products, container, false);
         mWaitingDialog = WaitingDialog.show(requireContext(), "Cargando Productos", true);
-
 
         InitViews();
 
@@ -67,7 +68,7 @@ public class ProductsFragment extends Fragment {
         ProductsViewModelFactory factory = new ProductsViewModelFactory(sharedLoadingViewModel, productRepository);
         productsViewModel = new ViewModelProvider(this, factory).get(ProductsViewModel.class);
 
-        productAdapter = new ProductAdapter(requireContext(), new ArrayList<>(), isHorizontalLayout, productsViewModel, recyclerView, i_fragment_no_result, getChildFragmentManager());
+        productAdapter = new ProductAdapter(requireContext(), new ArrayList<>(), isHorizontalLayout, productsViewModel, recyclerView, i_fragment_no_result, getChildFragmentManager(), tv_type);
 
         recyclerView.setAdapter(productAdapter);
 
@@ -82,6 +83,26 @@ public class ProductsFragment extends Fragment {
                     sharedLoadingViewModel.setLoadingState(false);
                 }
                 productAdapter.setProducts(products);
+
+                List<String> categorias = new ArrayList<>();
+                categorias.add("Todos");
+                for (Product product: products) {
+                    if (!categorias.contains(product.getType()))
+                        categorias.add(product.getType());
+                }
+
+                categoryAdapter = new CategoryAdapter(categorias, this::onProvinceSelected, requireContext());
+
+                tv_title_screen.setText(categorias.get(0));
+
+                tv_pre_title.setVisibility(View.VISIBLE);
+                tv_title_screen.setVisibility(View.VISIBLE);
+
+                rv_provincias.setAdapter(categoryAdapter);
+            }
+            private void onProvinceSelected(String category) {
+                tv_title_screen.setText(category);
+                productAdapter.setProductsByType(category);
             }
         });
 
@@ -92,11 +113,15 @@ public class ProductsFragment extends Fragment {
     }
 
     private void InitViews() {
+        tv_title_screen = view.findViewById(R.id.tv_title_screen);
+        tv_pre_title = view.findViewById(R.id.tv_pre_title);
+        rv_provincias = view.findViewById(R.id.rv_provincias);
         searchView = view.findViewById(R.id.search_view);
         i_fragment_no_result = view.findViewById(R.id.i_fragment_no_results);
         iconLarge = view.findViewById(R.id.icon_large);
         iconSmall = view.findViewById(R.id.icon_small);
         icon_multiple = view.findViewById(R.id.icon_multiple);
+        tv_type = view.findViewById(R.id.tv_type);
     }
 
     private void InitListeners() {

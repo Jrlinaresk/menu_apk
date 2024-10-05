@@ -1,5 +1,5 @@
 package com.palgao.menu.modules.Bussiness;
-import com.palgao.menu.modules.Bussiness.entityes.Business;
+import com.palgao.menu.modules.Bussiness.entityes.Bussiness;
 
 import java.util.List;
 import retrofit2.Call;
@@ -12,17 +12,17 @@ import retrofit2.http.Path;
 
 public interface ApiService {
     @GET("business")
-    Call<List<Business>> findAll();
+    Call<List<Bussiness>> findAll();
 
     @GET("business/{id}")
-    Call<Business> findOne(@Path("id") String id);
+    Call<Bussiness> findOne(@Path("id") String id);
 
     @POST("business")
-    Call<Business> create(@Body Business business);
+    Call<Bussiness> create(@Body Bussiness bussiness);
 
     @PATCH("business/{id}")
-    Call<Business> update(@Path("id") String id, @Body Business business);
+    Call<Bussiness> update(@Path("id") String id, @Body Bussiness bussiness);
 
     @DELETE("business/{id}")
-    Call<Business> remove(@Path("id") String id);
+    Call<Bussiness> remove(@Path("id") String id);
 }

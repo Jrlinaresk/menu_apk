@@ -1,9 +1,16 @@
 package com.palgao.menu.tools;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.widget.TextView;
 
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.palgao.menu.MasterActivity;
 import com.palgao.menu.R;
 import com.palgao.menu.modules.products.ui.ProductAdapter;
 
@@ -73,4 +81,47 @@ public class toolsUI {
 
         return new String[]{apertura, cierre};
     }
+
+    public static void showNotification2(String title, String message, Context context, String NOTIFICATION_CHANNEL_ID, String NOTIFICATION_CHANNEL_NAME) {
+        Intent intent = new Intent(context, MasterActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        // Sonido personalizado
+        // Uri customSoundUri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.tu_sonido_personalizado);
+
+        // Patrón de vibración
+        long[] vibrationPattern = {0, 1000}; // Espera 0 ms y vibra 500 ms
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                //.setSound(customSoundUri) // Sonido personalizado
+                .setVibrate(vibrationPattern) // Patrón de vibración
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setGroup("your_group_key");
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = notificationManager.getNotificationChannel(NOTIFICATION_CHANNEL_ID);
+            if (channel == null) {
+                channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Descripción del canal de notificaciones");
+                // channel.setSound(customSoundUri, null); // Asigna el sonido al canal
+                channel.enableVibration(true); // Habilita la vibración en el canal
+                channel.setVibrationPattern(vibrationPattern); // Establece el patrón de vibración
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
+
+        notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
+    }
+
 }

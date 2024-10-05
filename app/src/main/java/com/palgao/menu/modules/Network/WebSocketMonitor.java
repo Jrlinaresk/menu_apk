@@ -28,10 +28,13 @@ public class WebSocketMonitor {
     private TextView backendStatusTextView;
     private String BASE_URL = "https://pc3ld10h-8080.usw3.devtunnels.ms"; // Asegúrate de usar "https" o "wss" si es seguro
     private ProductsViewModel productsViewModel;
+    private ConnectionViewModel connectionViewModel;
 
-    public WebSocketMonitor(TextView backendStatusTextView, ProductsViewModel productsViewModel) {
+
+    public WebSocketMonitor(TextView backendStatusTextView, ProductsViewModel productsViewModel, ConnectionViewModel connectionViewModel) {
         this.productsViewModel = productsViewModel;
         this.backendStatusTextView = backendStatusTextView;
+        this.connectionViewModel = connectionViewModel;
         setupSocketIO();
     }
 

@@ -20,6 +20,7 @@ public class ConnectionFragment extends Fragment {
     private TextView backendStatusTextView;
     private InternetConnectionMonitor internetConnectionMonitor;
     private ProductsViewModel productsViewModel;
+    private ConnectionViewModel connectionViewModel;
 
 
     @Override
@@ -33,10 +34,13 @@ public class ConnectionFragment extends Fragment {
         ProductRepositoryImpl productRepository = new ProductRepositoryImpl();
         ProductsViewModelFactory factory = new ProductsViewModelFactory(null, productRepository);
         productsViewModel = new ViewModelProvider(this, factory).get(ProductsViewModel.class);
+        connectionViewModel = new ViewModelProvider(this).get(ConnectionViewModel.class);
 
         //
         // Inicializar los monitores
-        internetConnectionMonitor = new InternetConnectionMonitor(getContext(), internetStatusTextView, backendStatusTextView, productsViewModel);
+        internetConnectionMonitor = new InternetConnectionMonitor(getContext(), internetStatusTextView, backendStatusTextView, productsViewModel, connectionViewModel);
+
+        observeConnectionStatus();
 
         return view;
     }
@@ -56,5 +60,25 @@ public class ConnectionFragment extends Fragment {
         internetConnectionMonitor.unregisterNetworkCallback();
         // Desconectar el WebSocket
         // webSocketMonitor.disconnectSocket();
+    }
+
+    private void observeConnectionStatus() {
+        connectionViewModel.getInternetConnectionStatus().observe(getViewLifecycleOwner(), isConnected -> {
+            if (isConnected) {
+                internetStatusTextView.setVisibility(View.GONE);
+            } else {
+                internetStatusTextView.setVisibility(View.VISIBLE);
+                internetStatusTextView.setText("No Internet Connection");
+            }
+        });
+
+        connectionViewModel.getBackendConnectionStatus().observe(getViewLifecycleOwner(), isConnected -> {
+            if (isConnected) {
+                backendStatusTextView.setVisibility(View.GONE);
+            } else {
+                backendStatusTextView.setVisibility(View.VISIBLE);
+                backendStatusTextView.setText("Disconnected from backend");
+            }
+        });
     }
 }
