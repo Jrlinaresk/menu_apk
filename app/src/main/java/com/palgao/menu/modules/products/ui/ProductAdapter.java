@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.palgao.menu.R;
@@ -20,30 +18,33 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.stream.Collectors;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private List<Product> productList;
     private List<Product> filteredProductList;
+    private List<Product> listTemp;
     private ProductsViewModel productViewModel;
     private int isHorizontalLayout;
     private RecyclerView recyclerView;
 
     private View i_fragment_no_result;
+    private TextView tv_type;
 
     private Context context;
     private FragmentManager fragmentManager;
 
-    public ProductAdapter(Context context, List<Product> productList, int isHorizontalLayout, ProductsViewModel productViewModel, RecyclerView recyclerView, View i_fragment_no_result, FragmentManager fragmentManager) {
+    public ProductAdapter(Context context, List<Product> productList, int isHorizontalLayout, ProductsViewModel productViewModel, RecyclerView recyclerView, View i_fragment_no_result, FragmentManager fragmentManager, TextView tv_type) {
         this.productList = productList != null ? productList : new ArrayList<>();
         this.recyclerView = recyclerView;
         this.filteredProductList = new ArrayList<>(this.productList);
+        this.listTemp = new ArrayList<>(this.filteredProductList);
         this.isHorizontalLayout = isHorizontalLayout;
         this.productViewModel = productViewModel;
         this.i_fragment_no_result = i_fragment_no_result;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.tv_type = tv_type;
     }
 
 
@@ -66,7 +67,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = filteredProductList.get(position);
         String productId = product.getId();
 
-        holder.bind(product);
+        holder.bind(product, tv_type);
     }
 
     @Override
@@ -90,9 +91,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void setProducts(List<Product> productList) {
         this.productList = productList != null ? productList : new ArrayList<>();
         this.filteredProductList = new ArrayList<>(this.productList);
-        updateUI(productList);
+        this.listTemp = new ArrayList<>(this.filteredProductList);
+
+        // updateUI(productList);
         notifyDataSetChanged();
     }
+    public void setProductsByType(String type) {
+        if  (type.equals("Todos"))
+        {
+            this.productList = productList != null ? productList : new ArrayList<>();
+            this.filteredProductList = new ArrayList<>(this.productList);
+            this.listTemp = new ArrayList<>(this.filteredProductList);
+        }
+        else if (this.productList != null) {
+            // Filtrando la lista de productos por el campo 'type'
+            List<Product> filteredList = this.productList.stream()
+                    .filter(product -> type.equals(product.getType()))
+                    .collect(Collectors.toList());
+
+            // Asignar la lista filtrada a productList
+            this.filteredProductList = filteredList;
+            this.listTemp = new ArrayList<>(this.filteredProductList);
+        } else {
+            // Si la lista es null, se asigna una lista vacía
+            this.productList = new ArrayList<>();
+            this.filteredProductList = new ArrayList<>();
+            this.listTemp = new ArrayList<>(this.filteredProductList);
+        }
+
+
+        // Actualizar la UI con la lista filtrada y notificar los cambios
+       // updateUI(this.productList);
+        notifyDataSetChanged();
+    }
+
 
     private void updateUI(List<Product> products) {
         if (products.isEmpty()) {
@@ -110,12 +142,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void filter(String query) {
         filteredProductList.clear();
         if (query.isEmpty()) {
-            filteredProductList.addAll(productList);
+            filteredProductList.addAll(listTemp);
         } else {
             String queryLower = query.toLowerCase();
-            for (Product product : productList) {
+            for (Product product : listTemp) {
                 if (product.getName().toLowerCase().contains(queryLower)) {
                     filteredProductList.add(product);
+                }
+            }
+            if(filteredProductList.isEmpty())
+            {
+                for (Product product : listTemp) {
+                    if (product.getDescription().toLowerCase().contains(queryLower)) {
+                        filteredProductList.add(product);
+                    }
                 }
             }
         }
@@ -126,15 +166,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         private final TextView productName;
         private final TextView productPrice;
         private final ImageView productImage;
-
+        private final TextView tv_details, mtv_type;
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             productImage = itemView.findViewById(R.id.productImage);
+            tv_details = itemView.findViewById(R.id.tv_details);
+            mtv_type = itemView.findViewById(R.id.tv_type);
         }
 
-        public void bind(Product product) {
+        public void bind(Product product, TextView tv_type) {
+            mtv_type.setText(product.getType());
+            tv_type.setText("Productos de la Carta"); //product.getType()
+            if (!product.getDescription().isEmpty())
+            {
+                tv_details.setText(product.getDescription());
+            }
+            else {
+                tv_details.setVisibility(View.GONE);
+            }
             productName.setText(product.getName());
             productPrice.setText(String.valueOf(product.getPrice()));
 

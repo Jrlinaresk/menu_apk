@@ -9,6 +9,7 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -61,7 +62,7 @@
         </activity>
 
         <service
-            android:name=".modules.Notifications.NotificationWebSocketClient"
+            android:name=".modules.Notifications.NotificationPush"
             android:foregroundServiceType="dataSync"
             android:exported="false" />
 

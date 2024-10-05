@@ -28,10 +28,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/fc_status_conection"
+        app:layout_constraintBottom_toTopOf="@+id/ll_propaganda"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/include_location"
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
@@ -67,7 +67,7 @@
     </LinearLayout>
 
     <include
-        android:id="@+id/linearLayout2"
+        android:id="@+id/include_location"
         layout="@layout/include_preview_fragment_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +108,18 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </androidx.fragment.app.FragmentContainerView>
+
+    <LinearLayout
+        android:id="@+id/ll_propaganda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/fc_status_conection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include layout="@layout/include_propaganda" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

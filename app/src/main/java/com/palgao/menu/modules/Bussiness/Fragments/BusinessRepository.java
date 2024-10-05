@@ -1,6 +1,6 @@
 package com.palgao.menu.modules.Bussiness.Fragments;
 import com.palgao.menu.modules.Bussiness.ApiService;
-import com.palgao.menu.modules.Bussiness.entityes.Business;
+import com.palgao.menu.modules.Bussiness.entityes.Bussiness;
 
 import java.util.List;
 import retrofit2.Call;
@@ -20,23 +20,23 @@ public class BusinessRepository {
         apiService = retrofit.create(ApiService.class);
     }
 
-    public Call<List<Business>> findAll() {
+    public Call<List<Bussiness>> findAll() {
         return apiService.findAll();
     }
 
-    public Call<Business> findOne(String id) {
+    public Call<Bussiness> findOne(String id) {
         return apiService.findOne(id);
     }
 
-    public Call<Business> create(Business business) {
-        return apiService.create(business);
+    public Call<Bussiness> create(Bussiness bussiness) {
+        return apiService.create(bussiness);
     }
 
-    public Call<Business> update(String id, Business business) {
-        return apiService.update(id, business);
+    public Call<Bussiness> update(String id, Bussiness bussiness) {
+        return apiService.update(id, bussiness);
     }
 
-    public Call<Business> remove(String id) {
+    public Call<Bussiness> remove(String id) {
         return apiService.remove(id);
     }
 }

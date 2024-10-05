@@ -9,51 +9,23 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/text_view_business_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Nombre del Negocio"
+        android:text="Lista de Negocios"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/text_view_business_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Descripción del Negocio"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:text="Seleccione uno..."
+        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/text_view_business_address"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_bussiness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Dirección"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
-
-    <TextView
-        android:id="@+id/text_view_business_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Ubicación"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
-
-    <TextView
-        android:id="@+id/text_view_business_horario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Horario"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
-
-    <TextView
-        android:id="@+id/text_view_business_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Email"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/item_bussiness"/>
 
 </LinearLayout>

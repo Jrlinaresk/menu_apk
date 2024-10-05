@@ -29,6 +29,7 @@ public class ProductsViewModel extends ViewModel {
     private Socket socket;
 
     private final MutableLiveData<List<Product>> products = new MutableLiveData<>();
+    private final MutableLiveData<List<String>> category = new MutableLiveData<>();
     private final ProductRepositoryImpl productRepository;
 
     public ProductsViewModel(SharedLoadingViewModel sharedLoadingViewModel, ProductRepositoryImpl productRepository) {
@@ -48,12 +49,25 @@ public class ProductsViewModel extends ViewModel {
         return products;
     }
 
+    public LiveData<List<String>> getCategorias(){
+        return category;
+    }
+
     public void loadProducts() {
         productRepository.findAll().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful()) {
                     products.setValue(response.body());
+
+                    List<String> categorias = new ArrayList<>();
+
+                    for (Product product: products.getValue()) {
+                        categorias.add(product.getType());
+                    }
+
+                    category.setValue(categorias);
+
                     sharedLoadingViewModel.setLoadingState(false);
                 }
                 else {

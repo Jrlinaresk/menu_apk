@@ -18,25 +18,29 @@ public class InternetConnectionMonitor {
     private TextView internetStatusTextView, backendStatusTextView;
     private WebSocketMonitor webSocketMonitor;
     private ProductsViewModel productsViewModel;
+    private ConnectionViewModel connectionViewModel;
 
-    public InternetConnectionMonitor(Context context, TextView internetStatusTextView, TextView backendStatusTextView, ProductsViewModel productsViewModel) {
+
+    public InternetConnectionMonitor(Context context, TextView internetStatusTextView, TextView backendStatusTextView, ProductsViewModel productsViewModel, ConnectionViewModel connectionViewModel) {
         this.productsViewModel = productsViewModel;
         this.backendStatusTextView = backendStatusTextView;
         this.internetStatusTextView = internetStatusTextView;
+        this.connectionViewModel = connectionViewModel;
+
         connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         networkCallback = new ConnectivityManager.NetworkCallback() {
             @Override
             public void onAvailable(Network network) {
                 updateInternetStatus("Connected", 1);
-                // Aquí puedes intentar reconectar tu WebSocket si es necesario
+                connectionViewModel.setInternetConnected(true); // Actualizar estado de conexión a Internet
 
             }
 
             @Override
             public void onLost(Network network) {
                 updateInternetStatus("No Internet Connection", 0);
-                // Aquí puedes detener el WebSocket si es necesario
+                connectionViewModel.setInternetConnected(false); // Actualizar estado de desconexión
             }
         };
     }
@@ -66,7 +70,7 @@ public class InternetConnectionMonitor {
             case 1:
             {
                 new Handler(Looper.getMainLooper()).post(() -> {
-                    webSocketMonitor = new WebSocketMonitor(backendStatusTextView, productsViewModel);
+                    webSocketMonitor = new WebSocketMonitor(backendStatusTextView, productsViewModel, connectionViewModel);
                     internetStatusTextView.setText(mensaje);
                     internetStatusTextView.setVisibility(View.GONE); // o View.GONE según sea necesario
                 });

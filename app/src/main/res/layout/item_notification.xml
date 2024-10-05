@@ -28,7 +28,7 @@
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/ll_add_remove"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
